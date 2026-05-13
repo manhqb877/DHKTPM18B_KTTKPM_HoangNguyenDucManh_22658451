@@ -1,0 +1,95 @@
+/* Reset & Cấu hình cơ bản */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Layout chính: Chia 2 cột mượt mà */
+.app-container {
+  display: flex;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+.main-content { flex: 1; }
+.sidebar { width: 350px; }
+
+/* Hiệu ứng Glassmorphism chóp bu */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Typography */
+.title-glow {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px #ff4757, 0 0 20px #ff4757;
+  margin-bottom: 10px;
+}
+.subtitle { color: #dcdde1; margin-bottom: 30px; font-size: 1.1rem; }
+.price { color: #2ed573; font-size: 1.3rem; margin: 10px 0; }
+.stock-ok { color: #f1c40f; font-weight: bold; }
+.stock-out { color: #ff4757; font-weight: bold; animation: pulse 1s infinite; }
+
+/* Lưới Sản phẩm */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+.card { padding: 25px; text-align: center; transition: transform 0.3s; }
+.card:hover { transform: translateY(-5px); border-color: rgba(255, 255, 255, 0.3); }
+.card-img { font-size: 5rem; margin-bottom: 15px; }
+
+/* Nút bấm (Buttons) */
+.btn {
+  border: none; padding: 12px 15px; border-radius: 10px; font-weight: bold; cursor: pointer;
+  transition: all 0.3s; width: 100%; font-size: 0.95rem; text-transform: uppercase;
+}
+.btn-group { display: flex; gap: 10px; margin-top: 15px; }
+.btn-primary { background: #ff4757; color: white; }
+.btn-primary:hover:not(:disabled) { background: #ff6b81; box-shadow: 0 0 15px #ff4757; }
+.btn-secondary { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.2); }
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
+.btn-checkout { background: linear-gradient(90deg, #f0932b, #ff7f50); color: white; font-size: 1.1rem; margin-top: 20px;}
+.btn-checkout:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 0 20px #f0932b; }
+.btn-close { background: #576574; color: white; margin-top: 10px; }
+.btn:disabled { background: #2f3640; color: #7f8fa6; cursor: not-allowed; box-shadow: none; }
+
+/* Giỏ hàng (Sticky Sidebar) */
+.cart-panel { position: sticky; top: 30px; padding: 25px; }
+.cart-panel h2 { margin-bottom: 20px; color: #f1c40f; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;}
+.cart-items { min-height: 150px; max-height: 400px; overflow-y: auto; }
+.cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+.cart-item .qty { background: #ff4757; padding: 2px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: bold;}
+.empty-cart { text-align: center; color: #7f8fa6; margin-top: 50px; font-style: italic; }
+
+/* Modal Chi tiết sản phẩm */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+  display: flex; justify-content: center; align-items: center; z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+}
+.modal { width: 90%; max-width: 450px; padding: 30px; text-align: center; animation: slideUp 0.3s ease-out; }
+.modal-img { font-size: 6rem; margin-bottom: 20px; animation: bounce 2s infinite; }
+.modal-desc { color: #c8d6e5; margin: 15px 0; line-height: 1.6; font-size: 0.95rem;}
+
+/* Animations */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+/* Reponsive cho màn hình nhỏ */
+@media (max-width: 900px) {
+  .app-container { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .cart-panel { position: relative; top: 0; }
+}
